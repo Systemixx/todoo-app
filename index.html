@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO-App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>TODO-App</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Neues TODO eingeben" required>
+            <button type="submit">Hinzufügen</button>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const todoForm = document.getElementById('todo-form');
+            const todoInput = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+
+            // Event Listener zum Hinzufügen eines neuen TODOs
+            todoForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const todoText = todoInput.value.trim();
+                if (todoText !== '') {
+                    addTodoToList(todoText);
+                    todoInput.value = '';
+                }
+            });
+
+            // Funktion zum Hinzufügen eines neuen TODOs zur Liste
+            function addTodoToList(todoText) {
+                const li = document.createElement('li');
+                li.textContent = todoText;
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Löschen';
+                deleteBtn.classList.add('delete-btn');
+                deleteBtn.addEventListener('click', function () {
+                    li.remove();
+                });
+                li.appendChild(deleteBtn);
+                todoList.appendChild(li);
+            }
+        });
+    </script>
+</body>
+
+</html>
